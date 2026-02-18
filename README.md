@@ -86,4 +86,4 @@ npm run test:watch    # テスト (ウォッチモード)
 
 ## ライセンス
 
-UNLICENSED
+MIT
