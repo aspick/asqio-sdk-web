@@ -1,6 +1,6 @@
 # asqio-sdk-web
 
-asqio の Web 向けサポート SDK（`@asqio/web-sdk`）。React 18+ を前提とした UI コンポーネント・Hooks・API クライアントを提供する。
+asqio の Web 向けサポート SDK（`@ensemble-lab/asqio-sdk-web`）。React 18+ を前提とした UI コンポーネント・Hooks・API クライアントを提供する。
 
 ## Tech Stack
 
