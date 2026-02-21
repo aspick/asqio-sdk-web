@@ -1,3 +1,5 @@
+export { useTopics } from './useTopics';
+export type { UseTopicsResult } from './useTopics';
 export { useTickets } from './useTickets';
 export type { UseTicketsResult } from './useTickets';
 export { useTicket } from './useTicket';

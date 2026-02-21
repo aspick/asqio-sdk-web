@@ -50,6 +50,21 @@
   border-color: var(--asqio-primary-color, #007aff);
 }
 
+.select {
+  border: 1px solid var(--asqio-border-color, #dee2e6);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  background: var(--asqio-bg, #fff);
+  color: var(--asqio-text-color, #212529);
+}
+
+.select:focus {
+  border-color: var(--asqio-primary-color, #007aff);
+}
+
 .textarea {
   border: 1px solid var(--asqio-border-color, #dee2e6);
   border-radius: 8px;

@@ -1,5 +1,6 @@
 // Types
 export type {
+  Topic,
   Ticket,
   Message,
   TicketWithMessages,
@@ -11,6 +12,7 @@ export type {
   RegisterDeviceParams,
   UpdateDeviceParams,
   TicketListResponse,
+  TopicListResponse,
   MessageListResponse,
   UnreadCountResponse,
   ApiErrorCode,
@@ -30,6 +32,7 @@ export type { AsqioProviderProps } from './context';
 
 // Hooks
 export {
+  useTopics,
   useTickets,
   useTicket,
   useCreateTicket,
@@ -39,6 +42,7 @@ export {
   useUnreadCount,
 } from './hooks';
 export type {
+  UseTopicsResult,
   UseTicketsResult,
   UseTicketResult,
   UseCreateTicketResult,

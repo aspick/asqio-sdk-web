@@ -1,6 +1,12 @@
+export interface Topic {
+  id: string;
+  name: string;
+}
+
 export interface Ticket {
   id: string;
   title: string | null;
+  topic: Topic | null;
   context: Record<string, unknown> | null;
   device_info: Record<string, unknown> | null;
   unread: boolean;

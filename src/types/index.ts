@@ -1,4 +1,5 @@
 export type {
+  Topic,
   Ticket,
   Message,
   TicketWithMessages,
@@ -13,6 +14,7 @@ export type {
   RegisterDeviceParams,
   UpdateDeviceParams,
   TicketListResponse,
+  TopicListResponse,
   MessageListResponse,
   UnreadCountResponse,
   ApiErrorCode,

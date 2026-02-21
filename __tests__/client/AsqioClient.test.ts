@@ -106,6 +106,32 @@ describe('AsqioClient', () => {
   }
 
   // =======================================================================
+  // getTopics
+  // =======================================================================
+
+  describe('getTopics', () => {
+    const topicsResponse = {
+      topics: [
+        { id: 'topic-1', name: 'お支払い' },
+        { id: 'topic-2', name: 'アカウント' },
+      ],
+    };
+
+    it('sends GET to /topics and returns the topics array', async () => {
+      fetchMock.mockResolvedValueOnce(okJson(topicsResponse));
+
+      const result = await client.getTopics();
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      const [url, init] = fetchMock.mock.calls[0];
+      expect(url).toBe(`${BASE_URL}/topics`);
+      expect(init.method).toBeUndefined();
+      expectStandardHeaders();
+      expect(result).toEqual(topicsResponse.topics);
+    });
+  });
+
+  // =======================================================================
   // getTickets
   // =======================================================================
 
@@ -237,6 +263,25 @@ describe('AsqioClient', () => {
       expect(body.device_model).toBe('iPhone 15');
       expect(body.locale).toBe('ja-JP');
       expect(body.timezone).toBe('America/New_York');
+    });
+
+    it('includes topic_id in the request body when provided', async () => {
+      fetchMock.mockResolvedValueOnce(okJson(ticket));
+
+      await client.createTicket({ message: 'Hello', topic_id: 'topic-1' });
+
+      const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+      expect(body.topic_id).toBe('topic-1');
+      expect(body.message).toBe('Hello');
+    });
+
+    it('omits topic_id from the request body when not provided', async () => {
+      fetchMock.mockResolvedValueOnce(okJson(ticket));
+
+      await client.createTicket({ message: 'Hello' });
+
+      const body = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+      expect(body.topic_id).toBeUndefined();
     });
 
     it('uses appVersion from config when not provided in params', async () => {
