@@ -6,11 +6,12 @@ import type {
   UpdateDeviceParams,
   PaginationParams,
   TicketListResponse,
+  TopicListResponse,
   MessageListResponse,
   UnreadCountResponse,
   ApiErrorResponse,
 } from '../types/api';
-import type { TicketWithMessages, Ticket, Message, Device } from '../types/models';
+import type { TicketWithMessages, Ticket, Message, Device, Topic } from '../types/models';
 import { AsqioError, AsqioNetworkError } from './errors';
 import { detectDeviceInfo } from './device-info';
 
@@ -25,6 +26,13 @@ export class AsqioClient {
     this.tenantKey = config.tenantKey;
     this.getToken = config.getToken;
     this.appVersion = config.appVersion;
+  }
+
+  // --- Topics ---
+
+  async getTopics(): Promise<Topic[]> {
+    const res = await this.request<TopicListResponse>('/topics');
+    return res.topics;
   }
 
   // --- Tickets ---

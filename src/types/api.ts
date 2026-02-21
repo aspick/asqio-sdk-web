@@ -1,4 +1,4 @@
-import type { Message, PaginationMeta, Ticket, TicketWithMessages, Device } from './models';
+import type { Message, PaginationMeta, Ticket, TicketWithMessages, Device, Topic } from './models';
 
 // --- Request types ---
 
@@ -10,6 +10,7 @@ export interface PaginationParams {
 export interface CreateTicketParams {
   message: string;
   title?: string;
+  topic_id?: string;
   context?: Record<string, unknown>;
   platform?: string;
   os_version?: string;
@@ -52,12 +53,16 @@ export interface MessageListResponse {
   meta: PaginationMeta;
 }
 
+export interface TopicListResponse {
+  topics: Topic[];
+}
+
 export interface UnreadCountResponse {
   unread_count: number;
 }
 
 // Re-export for convenience
-export type { Ticket, TicketWithMessages, Message, Device, PaginationMeta };
+export type { Ticket, TicketWithMessages, Message, Device, Topic, PaginationMeta };
 
 // --- Error types ---
 

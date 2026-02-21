@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useCreateTicket } from '../../hooks/useCreateTicket';
+import { useTopics } from '../../hooks/useTopics';
 import type { Ticket } from '../../types';
 import styles from './NewThreadForm.module.css';
 
@@ -17,7 +18,9 @@ export function NewThreadForm({
   className,
 }: NewThreadFormProps) {
   const { create, loading, error } = useCreateTicket();
+  const { topics } = useTopics();
   const [title, setTitle] = useState('');
+  const [topicId, setTopicId] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
@@ -28,6 +31,7 @@ export function NewThreadForm({
     const ticket = await create({
       message: trimmed,
       title: title.trim() || undefined,
+      topic_id: topicId || undefined,
       context,
     });
     onCreated?.(ticket);
@@ -52,6 +56,21 @@ export function NewThreadForm({
           onChange={(e) => setTitle(e.target.value)}
           disabled={loading}
         />
+        {topics.length > 0 && (
+          <select
+            className={styles.select}
+            value={topicId}
+            onChange={(e) => setTopicId(e.target.value)}
+            disabled={loading}
+          >
+            <option value="">トピックを選択（任意）</option>
+            {topics.map((topic) => (
+              <option key={topic.id} value={topic.id}>
+                {topic.name}
+              </option>
+            ))}
+          </select>
+        )}
         <textarea
           className={styles.textarea}
           placeholder="お問い合わせ内容を入力してください"
